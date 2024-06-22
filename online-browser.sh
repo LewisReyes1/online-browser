@@ -1,77 +1,52 @@
 #!/bin/bash
 
-# Regular Colors
-Black='\e[0;30m'        # Black
-Red='\e[0;31m'          # Red
-Green='\e[0;32m'        # Green
-Yellow='\e[0;33m'       # Yellow
-Blue='\e[0;34m'         # Blue
-Purple='\e[0;35m'       # Purple
-Cyan='\e[0;36m'         # Cyan
-White='\e[0;37m'        # White
+# Colors
+declare -A COLORS=(
+    [reset]='\e[0m'
+    [black]='\e[0;30m' [red]='\e[0;31m' [green]='\e[0;32m' [yellow]='\e[0;33m'
+    [blue]='\e[0;34m' [purple]='\e[0;35m' [cyan]='\e[0;36m' [white]='\e[0;37m'
+    [bblack]='\e[1;30m' [bred]='\e[1;31m' [bgreen]='\e[1;32m' [byellow]='\e[1;33m'
+    [bblue]='\e[1;34m' [bpurple]='\e[1;35m' [bcyan]='\e[1;36m' [bwhite]='\e[1;37m'
+)
 
-# Bold
-BBlack='\e[1;30m'       # Black
-BRed='\e[1;31m'         # Red
-BGreen='\e[1;32m'       # Green
-BYellow='\e[1;33m'      # Yellow
-BBlue='\e[1;34m'        # Blue
-BPurple='\e[1;35m'      # Purple
-BCyan='\e[1;36m'        # Cyan
-BWhite='\e[1;37m'       # White
+# Clear screen and trap signals
+clear
+trap "tput cnorm; exit" SIGINT SIGQUIT SIGTSTP
 
-
-#######################################################
-
-
-echo -ne '\033c'
-trap RM_HT_FOLDER SIGINT SIGQUIT SIGTSTP
+# Print header
 echo ""
 sleep 0.1
-echo -e "${Cyan}    +${Yellow}--------------------------------------------------------------------------------------------------------------------------${Cyan}+"
-sleep 0.1
-echo -e "${Yellow}     |                                                                                                                        |"
-sleep 0.1
-echo -e "     |${Green}     ██████╗ ███╗   ██╗██╗     ██╗███╗   ██╗███████╗    ${Red}██████${Black}╗${Red} ██████${Black}╗${Red}  ██████${Black}╗${Red} ██${Black}╗${Red}    ██${Black}╗${Red}███████${Black}╗${Red}███████${Black}╗${Red}██████${Black}╗  ${Yellow}    |"
-sleep 0.1
-echo -e "     |${Green}    ██╔═══██╗████╗  ██║██║     ██║████╗  ██║██╔════╝    ${Red}██${Black}╔══${Red}██${Black}╗${Red}██${Black}╔══${Red}██${Black}╗${Red}██${Black}╔═══${Red}██${Black}╗${Red}██${Black}║${Red}    ██${Black}║${Red}██${Black}╔════╝${Red}██${Black}╔════╝${Red}██${Black}╔══${Red}██${Black}╗${Red}    ${Yellow} |"
-sleep 0.1
-echo -e "     |${Green}    ██║   ██║██╔██╗ ██║██║     ██║██╔██╗ ██║█████╗      ${Red}██████${Black}╔╝${Red}██████${Black}╔╝${Red}██${Black}║   ${Red}██${Black}║${Red}██${Black}║ ${Red}█${Black}╗ ${Red}██${Black}║${Red}███████${Black}╗${Red}█████${Black}╗  ${Red}██████${Black}╔╝    ${Yellow} |"
-sleep 0.1
-echo -e "     |${BGreen}    ██║   ██║██║╚██╗██║██║     ██║██║╚██╗██║██╔══╝      ${BRed}██${Black}╔══${BRed}██${Black}╗${BRed}██${Black}╔══${BRed}██${Black}╗${BRed}██${Black}║   ${Red}██${Black}║${BRed}██${Black}║${BRed}███${Black}╗${BRed}██${Black}║╚════${BRed}██${Black}║${BRed}██${Black}╔══╝  ${BRed}██${Black}╔══${BRed}██${Black}╗    ${Yellow} |"
-sleep 0.1
-echo -e "     |${BGreen}    ╚██████╔╝██║ ╚████║███████╗██║██║ ╚████║███████╗    ${BRed}██████${Black}╔╝${BRed}██${Black}║${BRed}  ██${Black}║╚${BRed}██████${Black}╔╝╚${BRed}███${Black}╔${BRed}███${Black}╔╝${BRed}███████${Black}║${BRed}███████${Black}╗${BRed}██${Black}║  ${BRed}██${Black}║    ${Yellow} |"
-sleep 0.1
-echo -e "     |${Green}     ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝    ${Black}╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝  ╚═╝ ${Yellow}    |"
-sleep 0.1
-echo -e "     |                                                                                                               ${BCyan} BETA${Yellow}    |"
-sleep 0.1
-echo -e "     |                                                                                                                        |"
-sleep 0.1
-echo -e "${Cyan}    +${Yellow}--------------------------------------------------------------------------------------------------------------------------${Cyan}+${Yellow}"
-sleep 0.1
-echo -e "                                     |${BRed} Online Browser ${BYellow}by${BGreen} Hamza Hammouch${Cyan} powerd by${BPurple} linuxserver${Yellow} |"
-sleep 0.1
-echo -e "                                     ${Cyan}+${Yellow}--------------------------------------------------------${Cyan}+"
-sleep 0.1
-
-#######################################################
-
-
-echo -e "${Yellow}     +${White}-------------------------------------------------------------------${Yellow}+"
-echo -e "${White}     | ${Yellow} ID ${White} |                   ${BPurple}   Browser Name                       ${White}   |"
-echo -e "${Yellow}     +${White}-------------------------------------------------------------------${Yellow}+"
-echo -e "${White}     | ${Red}[${Yellow}01${Red}]${White} |$Green Install Chromium${White}                                           |"
-echo -e "${White}     | ${Red}[${Yellow}02${Red}]${White} |$Green Install Firefox${White}                                            |"
-echo -e "${White}     | ${Red}[${Yellow}03${Red}]${White} |$Green Install Opera${White}                                              |"
-echo -e "${White}     | ${Red}[${Yellow}04${Red}]${White} |$Green Install Mullvad Browser${White}                                    |"
-echo -e "${Yellow}     +${White}-------------------------------------------------------------------${Yellow}+"
+echo -e "${COLORS[cyan]}+${COLORS[yellow]}----------------------------------------------------------${COLORS[cyan]}+"
+echo -e "${COLORS[yellow]}|${COLORS[reset]}                                                          ${COLORS[yellow]}|"
+echo -e "${COLORS[yellow]}|${COLORS[green]}     ██████╗ ███╗   ██╗██╗     ██╗███╗   ██╗███████╗${COLORS[reset]}          ${COLORS[yellow]}|"
+echo -e "${COLORS[yellow]}|${COLORS[green]}    ██╔═══██╗████╗  ██║██║     ██║████╗  ██║██╔════╝${COLORS[reset]}           ${COLORS[yellow]}|"
+echo -e "${COLORS[yellow]}|${COLORS[green]}    ██║   ██║██╔██╗ ██║██║     ██║██╔██╗ ██║█████╗${COLORS[reset]}            ${COLORS[yellow]}|"
+echo -e "${COLORS[yellow]}|${COLORS[bgreen]}    ██║   ██║██║╚██╗██║██║     ██║██║╚██╗██║██╔══╝${COLORS[reset]}            ${COLORS[yellow]}|"
+echo -e "${COLORS[yellow]}|${COLORS[bgreen]}    ╚██████╔╝██║ ╚████║███████╗██║██║ ╚████║███████╗${COLORS[reset]}          ${COLORS[yellow]}|"
+echo -e "${COLORS[yellow]}|${COLORS[green]}     ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝${COLORS[reset]}           ${COLORS[yellow]}|"
+echo -e "${COLORS[yellow]}|${COLORS[reset]}                                                          ${COLORS[yellow]}|"
+echo -e "${COLORS[cyan]}+${COLORS[yellow]}----------------------------------------------------------${COLORS[cyan]}+"
+echo -e "${COLORS[yellow]}                           ${COLORS[bred]} Online Browser ${COLORS[byellow]}by${COLORS[bgreen]} Hamza Hammouch${COLORS[cyan]} powered by${COLORS[bpurple]} linuxserver${COLORS[yellow]}"
+echo -e "${COLORS[cyan]}+${COLORS[yellow]}--------------------------------------------------------${COLORS[cyan]}+"
 echo ""
-echo -e -n "$White    ${Red} [${Cyan}!Note:${Red}]$White If your choice is Chromium type $Green 1${White} not ${Red}01$White and the same principle applies to other browsers "
+
+# Menu
+echo -e "${COLORS[yellow]}+${COLORS[white]}---------------------------------------------------${COLORS[yellow]}+"
+echo -e "${COLORS[white]}| ${COLORS[yellow]} ID ${COLORS[white]} |              ${COLORS[bpurple]}Browser Name${COLORS[reset]}                ${COLORS[white]}|"
+echo -e "${COLORS[yellow]}+${COLORS[white]}---------------------------------------------------${COLORS[yellow]}+"
+echo -e "${COLORS[white]}| ${COLORS[red]}[${COLORS[yellow]}1${COLORS[red]}]${COLORS[white]} |${COLORS[green]} Install Chromium${COLORS[reset]}              ${COLORS[white]}|"
+echo -e "${COLORS[white]}| ${COLORS[red]}[${COLORS[yellow]}2${COLORS[red]}]${COLORS[white]} |${COLORS[green]} Install Firefox${COLORS[reset]}               ${COLORS[white]}|"
+echo -e "${COLORS[white]}| ${COLORS[red]}[${COLORS[yellow]}3${COLORS[red]}]${COLORS[white]} |${COLORS[green]} Install Opera${COLORS[reset]}                 ${COLORS[white]}|"
+echo -e "${COLORS[white]}| ${COLORS[red]}[${COLORS[yellow]}4${COLORS[red]}]${COLORS[white]} |${COLORS[green]} Install Mullvad Browser${COLORS[reset]}     ${COLORS[white]}|"
+echo -e "${COLORS[yellow]}+${COLORS[white]}---------------------------------------------------${COLORS[yellow]}+"
 echo ""
-echo ""
-echo -e -n "$White    ${Red} [${Cyan}!${Red}]$White Type the$BRed ID$White "
-read -p "of your choice : " choice
+
+# User prompt
+echo -e "${COLORS[white]}${COLORS[red]} [${COLORS[cyan]}!Note:${COLORS[red]}]${COLORS[white]} If your choice is Chromium type ${COLORS[green]}1${COLORS[white]} not ${COLORS[red]}01${COLORS[reset]}"
+echo -e "${COLORS[white]}${COLORS[red]} [${COLORS[cyan]}!${COLORS[red]}]${COLORS[white]} Type the${COLORS[bred]} ID${COLORS[white]} of your choice: ${COLORS[reset]}"
+read -p "" choice
+
+# Browser installation
 case $choice in
     1)
         echo "Installing Chromium..."
@@ -139,39 +114,20 @@ case $choice in
         ;;
 esac
 
-#######################################################
-
+# Completion message
 clear
 echo ""
-sleep 0.1
-echo -e -n "$White    ${Red} [${Green} ✔ ${Red}]$White Browser installation completed successfully ( •̀ ω •́ )✧"
-sleep 0.1
+echo -e "${COLORS[white]}${COLORS[red]} [${COLORS[green]} ✔ ${COLORS[red]}]${COLORS[white]} Browser installation completed successfully ( •̀ ω •́ )✧${COLORS[reset]}"
 echo ""
-sleep 0.1
-echo ""
-sleep 0.1
-echo -e "    ${Red} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${Blue}⢀⣠⣴⣾⣿⣿⣿⣶⣄⡀⠀"
-sleep 0.1
-echo -e "    ${Red} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${Blue}⣀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄"
-sleep 0.1
-echo -e "    ${Red} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${Blue}⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷"
-sleep 0.1
-echo -e "    ${Red} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤${Blue}⠾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠉⠙⣿⣿⡿"
-sleep 0.1
-echo -e "    ${Red} ⠀⠀⠀⠀⠀⢀⣠⠶⠛⠁⠀⠀${Blue}⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣄⣠⣿⡿⠁"
-sleep 0.1
-echo -e "    ${Red} ⠀⠀⣀⡤⠞⠉⠀⠀⠀⠀⠀⠀${Blue}⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠀⠀"
-sleep 0.1
-echo -e "    ${Red} ⢀⡾⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${Blue}⠙⢿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠀⠀⠀⠀⠀"
-sleep 0.1
-echo -e "    ${Red} ⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⡀${Blue}⠙⢿⣿⡿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-sleep 0.1
-echo -e "    ${Red} ⣿⠀⠀⠀⠀⠀⠀⠀⣠⣴⣾⡿⠟⢋⣤⠶⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-sleep 0.1
-echo -e "    ${Red} ⠘⣧⡀⠀⢰⣿⣶⣿⠿⠛⣩⡴⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-sleep 0.1
-echo -e "    ${Red} ⠀⠈⠛⠦⣤⣤⣤⡤⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-sleep 0.1
-echo -e "    ${White}"
-sleep 0.1
-echo ""
+echo -e "${COLORS[red]} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${COLORS[blue]}⢀⣠⣴⣾⣿⣿⣿⣶⣄⡀⠀"
+echo -e "${COLORS[red]} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${COLORS[blue]}⣀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄"
+echo -e "${COLORS[red]} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${COLORS[blue]}⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷"
+echo -e "${COLORS[red]} ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤${COLORS[blue]}⠾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠉⠙⣿⣿⡿"
+echo -e "${COLORS[red]} ⠀⠀⠀⠀⠀⢀⣠⠶⠛⠁⠀⠀${COLORS[blue]}⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣄⣠⣿⡿⠁"
+echo -e "${COLORS[red]} ⠀⠀⣀⡤⠞⠉⠀⠀⠀⠀⠀⠀${COLORS[blue]}⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠀⠀"
+echo -e "${COLORS[red]} ⢀⡾⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀${COLORS[blue]}⠙⢿⣿⣿⣿⣿⣿⣿⠿⠛⠉⠀⠀⠀⠀⠀"
+echo -e "${COLORS[red]} ⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⡀${COLORS[blue]}⠙⢿⣿⡿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+echo -e "${COLORS[red]} ⣿⠀⠀⠀⠀⠀⠀⠀⣠⣴⣾⡿⠟⢋⣤⠶⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+echo -e "${COLORS[red]} ⠘⣧⡀⠀⢰⣿⣶⣿⠿⠛⣩⡴⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+echo -e "${COLORS[red]} ⠀⠈⠛⠦⣤⣤⣤⡤⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+echo -e "${COLORS[reset]}"
